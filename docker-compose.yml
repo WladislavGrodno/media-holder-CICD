@@ -2,29 +2,30 @@ version: '3.7'
 services:
   postgres:
     image: postgres:15
-    container_name: ${DB_HOST:postgres}
+    container_name: ${DB_HOST:-postgres}
+#    container_name: ${DB_HOST}
     environment:
-      POSTGRES_DB: ${DB_NAME:postgres}
-      POSTGRES_USER: ${DB_USER:postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:password}
+      POSTGRES_DB: ${DB_NAME:-postgres}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
       PGDATA: /data/postgres
     volumes:
       - ./postgres:/data/postgres
     ports:
-      - ${DB_PORT:5432}:5432
+      - ${DB_PORT:-5432}:5432
     restart: unless-stopped
   media-holder:
     image: docker.io/fldslf/media-holder:latest
-    container_name: ${MEDIAHOLDER_HOST:media-holder}
+    container_name: ${MEDIAHOLDER_HOST:-media-holder}
     environment: 
-      DATABASE_HOST: ${DB_HOST:postgres}
-      DATABASE_PORT: ${DB_PORT:5432}
-      DATABASE_NAME: ${DB_NAME:postgres}
-      DATABASE_USER: ${DB_USER:postgres}
-      DATABASE_PASSWORD: ${DB_PASSWORD:password}
+      DATABASE_HOST: ${DB_HOST:-postgres}
+      DATABASE_PORT: ${DB_PORT:-5432}
+      DATABASE_NAME: ${DB_NAME:-postgres}
+      DATABASE_USER: ${DB_USER:-postgres}
+      DATABASE_PASSWORD: ${DB_PASSWORD:-password}
       SERVICE_PORT: 8080
     ports:
-      - ${MEDIAHOLDER_PORT:8120}:8080
+      - ${MEDIAHOLDER_PORT:-8120}:8080
     depends_on:
       - postgres
     volumes:
