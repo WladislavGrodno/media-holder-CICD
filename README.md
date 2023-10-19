@@ -14,11 +14,11 @@ Media holder service for store files on a web server
 ```
 git clone git@github.com:WladislavGrodno/media-holder-CICD.git
 ```
-* Tune service in .env file as You need (copy .env_example file to .env file and edit .env)
+* Tune service in .env file (copy .env_example file to .env file and edit .env as You need)
 
 ### Running
 
-* Run docker-compose 
+* Run docker-compose:
 ```
 sudo docker-compose up
 ```
